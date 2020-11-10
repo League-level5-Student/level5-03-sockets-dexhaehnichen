@@ -8,11 +8,11 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
-import _00_Click_Chat.networking.Client;
-import _00_Click_Chat.networking.Server;
+import _02_Chat_Application.Client;
+import _02_Chat_Application.Server;
 
 public class ChatApp extends JFrame {
-	JButton button = new JButton("CLICK");
+	JButton button = new JButton("SEND MESSAGE");
 	
 	Server server;
 	Client client;
@@ -21,7 +21,7 @@ public class ChatApp extends JFrame {
 	public static void main(String[] args) {
 		new ChatApp();
 	}
-	
+
 	public ChatApp(){
 		
 		int response = JOptionPane.showConfirmDialog(null, "Would you like to host a connection?", "Chat App", JOptionPane.YES_NO_OPTION);
@@ -30,7 +30,7 @@ public class ChatApp extends JFrame {
 			setTitle("SERVER");
 			JOptionPane.showMessageDialog(null, "Server started at: " + server.getIPAddress() + "\nPort: " + server.getPort());
 			button.addActionListener((e)->{
-				server.sendClick();
+				server.sendMessage(JOptionPane.showInputDialog("What message would you like to send?"));
 			});
 			add(button);
 			setVisible(true);
@@ -45,7 +45,7 @@ public class ChatApp extends JFrame {
 			int port = Integer.parseInt(prtStr);
 			client = new Client(ipStr, port);
 			button.addActionListener((e)->{
-				client.sendClick();
+				client.sendMessage(JOptionPane.showInputDialog("What message would you like to send?"));
 			});
 			add(button);
 			setVisible(true);
